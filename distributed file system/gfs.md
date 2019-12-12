@@ -1,4 +1,4 @@
-# Google File System
+#                          Google File System
 
 ## 1. Introduction
 
@@ -28,4 +28,51 @@ Feature:
 
   Most target apps require processing data in bulk at high rates rather than quick response for an individual read/write operation. => high bandwidth is more important than low latency.
 
-### 2.  
+### 2.  Architecture
+
+single master + multiple chunk servers + multiple clients.
+
+no cache on server side, cache for metadata on client side.
+
+#### 1. single master
+
+It maintains all file system metadata: namespace, access control info, mapping from files to chunks(i.e. filename -> list of chunk global index?), the current locations of chunks(i.e. chunk global index -> ip : port?).
+
+ A read example:
+
+> client -> master server:  filename, offset
+>
+> client <- master server:  chunk handle, chunk replicas locations
+>
+> client -> chunk server: chunk handle, byte range
+>
+> client  <- chunk server: chunk data
+
+#### 2. chunk size
+
+default: 64 MB.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
