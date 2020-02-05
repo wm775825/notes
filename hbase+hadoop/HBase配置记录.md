@@ -188,10 +188,20 @@ cd ~/hbase-2.1.8
 #### 6. 停止命令
 
 ```shell
-~/hadoop-2.7.7/stop-yarn.sh
-~/hadoop-2.7.7/stop-dfs.sh
-~/hbase-2.1.8/stop-hbase.sh
+~/hadoop-2.7.7/sbin/stop-yarn.sh
+~/hadoop-2.7.7/sbin/stop-dfs.sh
+~/hbase-2.1.8/bin/stop-hbase.sh
 ```
+
+### CASE 3. 分布式
+
+在onode3、nnode1、nnode2、nnode3、nnode3五台机器上配置。
+
+#### 1. 免密登录
+
+将上述五台机器的公钥汇总到一起，然后添加到每台机器的```~/.ssh/authorized_keys```文件中。
+
+#### 2. 分发
 
 
 
