@@ -17,13 +17,13 @@ wget https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.8/hbase-2.1.8-bin.tar
 tar zxvf hbase-2.1.8-bin.tar.gz
 ```
 
-编辑```hbase-2.1.8/conf/hbase-env.sh```，添加以下行
+- 追加```hbase-2.1.8/conf/hbase-env.sh```：
 
 ```shell
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
 ```
 
-编辑```hbase-2.1.8/conf/hbase-site.xml```，编辑如下：
+- 追加```hbase-2.1.8/conf/hbase-site.xml```：
 
 ```xml
 <configuration>
@@ -52,14 +52,12 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
 
 #### 2. 修改环境变量
 
-编辑```/etc/profile```，添加以下行
+- 追加```/etc/profile```：
 
 ```
 export HBASE_HOME=~/hbase-2.1.8
 export PATH=$HBASE_HOME/bin:$PATH
 ```
-
-使之生效：
 
 ```shell
 source /etc/profile
@@ -72,19 +70,19 @@ wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.7/hado
 tar zxvf hadoop-2.7.7.tar.gz
 ```
 
-编辑```hbase-2.1.8/conf/hbase-env.sh```，添加以下行：
+- 追加```hbase-2.1.8/conf/hbase-env.sh```：
 
 ```shell
 export HBASE_CLASSPATH=~/hadoop-2.7.7/etc/hadoop
 ```
 
-编辑```hadoop-2.7.7/etc/hadoop/hadoop-env.sh```，添加以下行：
+- 追加```hadoop-2.7.7/etc/hadoop/hadoop-env.sh```：
 
 ```shell
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
 ```
 
-编辑```hadoop-2.7.7/etc/hadoop/core-site.xml```，添加以下行：
+- 追加```hadoop-2.7.7/etc/hadoop/core-site.xml```：
 
 ```xml
 <configuration>
@@ -95,7 +93,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
 </configuration>
 ```
 
-编辑```hadoop-2.7.7/etc/hadoop/hdfs-site.xml```，添加以下行：
+- 追加```hadoop-2.7.7/etc/hadoop/hdfs-site.xml```：
 
 ```xml
 <configuration>
@@ -108,7 +106,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk/
 
 #### 4. 启动hdfs
 
-运行
+- 格式化hdfs：
 
 ```shell
 cd ~/hadoop2.7.7
@@ -123,13 +121,13 @@ cd ~/hadoop2.7.7
 19/12/26 15:35:55 INFO namenode.FSImageFormatProtobuf: Image file /tmp/hadoop-wm775825/dfs/name/current/fsimage.ckpt_0000000000000000000 of size 325 bytes saved in 0 seconds.
 ```
 
-启动sshd服务
+- 启动sshd服务
 
 ```shell
 systemctl start sshd.service
 ```
 
-启动namenode和datanode进程：
+- 启动namenode和datanode进程：
 
 ```shell
 cd ~/hadoop-2.7.7
@@ -144,7 +142,7 @@ localhost: starting datanode, logging to /home/wm775825/hadoop-2.7.7/logs/hadoop
 0.0.0.0: starting secondarynamenode, logging to /home/wm775825/hadoop-2.7.7/logs/hadoop-wm775825-secondarynamenode-wm775825-pc.out
 ```
 
-启动yarn：
+- 启动yarn：
 
 ```shell
 ./sbin/start-yarn.sh
@@ -163,7 +161,7 @@ localhost: starting nodemanager, logging to /home/wm775825/hadoop-2.7.7/logs/yar
 
 #### 5. 启动hbase
 
-首先修改```hbase-2.1.8/conf/hbase-site.xml```，修改如下：
+- 追加```hbase-2.1.8/conf/hbase-site.xml```：
 
 ```xml
 <property>
@@ -172,7 +170,7 @@ localhost: starting nodemanager, logging to /home/wm775825/hadoop-2.7.7/logs/yar
 </property>
 ```
 
-然后启动```zookeeper```、```master```、```regionserver```：
+- 启动```zookeeper```、```master```、```regionserver```：
 
 ```shell
 cd ~/hbase-2.1.8
