@@ -121,11 +121,14 @@
 
   ```shell
   export HBASE_HOME=/home/dsl/hbase-2.1.8
+  export HBASE_CONF_DIR=$HBASE_HOME/conf
   export PATH=$HBASE_HOME/bin:$PATH
-  export HADOOP_HOME=/home/dsl/hadoop-2.7.7
-export PATH=$HADOOP_HOME/bin:$PATH
-  ```
   
+  export HADOOP_HOME=/home/dsl/hadoop-2.7.7
+  export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+  export PATH=$HADOOP_HOME/bin:$PATH
+  ```
+
   ```shell
   source /etc/profile
   ```
