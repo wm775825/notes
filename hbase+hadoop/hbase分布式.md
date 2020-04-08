@@ -2,7 +2,15 @@
 
 ## 1. 机器配置
 
+OS：ubuntu 18.04
+
 版本：java 8 + [hbase 2.1.8](https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.8/hbase-2.1.8-bin.tar.gz) + [hadoop 2.7.7](https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz)
+
+2020-02-27　版本调整为[hbase-2.2.3](https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.2.3/hbase-2.2.3-bin.tar.gz) + [hadoop-3.2.1](https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/stable/hadoop-3.2.1.tar.gz)
+
+​	并将hbase/lib下的所有```hadoop-*-2.8.5.jar```替换为同名的3.2.1版本（在```hadoop/share/hadoop```目录中找）
+
+　其中```hadoop-minicluster-2.8.5.jar```未找到同名的，暂替换为```hadoop-client-minicluster-3.2.1.jar```。
 
 节点：nnode1、nnode2、nnode3、nnode3四台机器。
 
@@ -13,8 +21,8 @@
 ## 3. hadoop
 
 - ```shell
-  wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.7/hadoop-2.7.7.tar.gz
-  tar zxvf hadoop-2.7.7.tar.gz
+  wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+  tar zxvf hadoop-3.2.1.tar.gz
   ```
 
 - ```hadoop-env.sh```：
@@ -71,15 +79,15 @@
 ## 4. hbase
 
 - ```shell
-  wget https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.1.8/hbase-2.1.8-bin.tar.gz
-  tar zxvf hbase-2.1.8-bin.tar.gz
+  wget https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.2.3/hbase-2.2.3-bin.tar.gz
+  tar zxvf hbase-2.2.3-bin.tar.gz
   ```
 
 - ```hbase-env.sh```：
 
   ```shell
   export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
-  export HBASE_CLASSPATH=~/hadoop-2.7.7/etc/hadoop
+  export HBASE_CLASSPATH=~/hadoop-3.2.1/etc/hadoop
   ```
 
 - ```hbase-site.xml```：
@@ -120,11 +128,11 @@
 - ```/etc/profile```：
 
   ```shell
-  export HBASE_HOME=/home/dsl/hbase-2.1.8
+  export HBASE_HOME=/home/dsl/hbase-2.3.3
   export HBASE_CONF_DIR=$HBASE_HOME/conf
   export PATH=$HBASE_HOME/bin:$PATH
   
-  export HADOOP_HOME=/home/dsl/hadoop-2.7.7
+  export HADOOP_HOME=/home/dsl/hadoop-3.2.1
   export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
   export PATH=$HADOOP_HOME/bin:$PATH
   ```
@@ -165,7 +173,7 @@
 - 启动hadoop
 
   ```shell
-  ~/hadoop-2.7.7/sbin/start-all.sh
+  ~/hadoop-3.2.1/sbin/start-all.sh
   ```
 
   使用jps命令，可在master节点观察到```SecondaryNameNode```、``` NameNode```、```ResourceManager```三个进程，在slave节点观察到```DataNode```、```NodeManager```两个进程。(均不包括jps进程)
@@ -173,7 +181,7 @@
 - 启动hadoop之后，启动hbase：
 
     ```shell
-    ~/hbase-2.1.8/bin/start-hbase.sh
+    ~/hbase-2.3.3/bin/start-hbase.sh
     ```
 
     使用jps命令，可在master节点观察到```HMaster```、``` HQuormpeer```两个进程，在slave节点观察到```HRegionServer```进程。(均不包括jps进程及hadoop相应进程)
@@ -181,13 +189,13 @@
 - 关闭hbase
 
   ```shell
-  ~/hbase-2.1.8/bin/stop-hbase.sh
+  ~/hbase-2.3.3/bin/stop-hbase.sh
   ```
 
 - 关闭hadoop
 
   ```shell
-  ~/hadoop-2.7.7/sbin/stop-all.sh
+  ~/hadoop-3.2.1/sbin/stop-all.sh
   ```
 
 
@@ -210,7 +218,7 @@
   将pool开头的五行注释掉，添加以下内容：
   # aliyun clock
   server 203.107.6.88
-  restrict 203.107.6.88
+  restrict 203.107.6.88  
   ```
 
   编辑完之后，手动同步一次时间(master和aliyun)
